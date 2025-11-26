@@ -1,0 +1,321 @@
+import { Factor, Region, Enquiry, ContentSection, Department, ChainOfResponsibilityNode, DataMapping, ChartDataPoint } from '@/types';
+
+export const mockFactors: Factor[] = [
+  {
+    id: 'cost-of-living',
+    name: 'Cost of Living',
+    score: 7.2,
+    trend: 'up',
+    trendPercent: 3.5,
+    description: 'Measures the financial pressure on households including utility costs, food, insurance, and child-related expenses relative to local incomes.',
+    category: 'Economic',
+    subFactors: [
+      { id: 'living-cost-index', name: 'Living Cost Index', score: 7.5, trend: 'up', status: 'Rising' },
+      { id: 'utility-costs', name: 'Utility Costs', score: 8.1, trend: 'up', status: 'High Risk' },
+      { id: 'food-costs', name: 'Food Costs', score: 6.8, trend: 'up', status: 'Rising' },
+      { id: 'financial-stress', name: 'Financial Stress', score: 7.9, trend: 'up', status: 'High Risk' },
+      { id: 'child-costs', name: 'Child Costs', score: 6.5, trend: 'flat', status: 'Stable' },
+      { id: 'insurance-costs', name: 'Insurance Costs', score: 7.3, trend: 'up', status: 'Rising' },
+    ],
+  },
+  {
+    id: 'housing',
+    name: 'Housing',
+    score: 8.5,
+    trend: 'up',
+    trendPercent: 2.1,
+    description: 'Housing affordability, availability, and quality metrics.',
+    category: 'Economic',
+    subFactors: [
+      { id: 'affordability', name: 'Affordability', score: 9.1, trend: 'up', status: 'High Risk' },
+      { id: 'availability', name: 'Availability', score: 7.8, trend: 'down', status: 'Improving' },
+      { id: 'quality', name: 'Quality', score: 6.2, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'crime-safety',
+    name: 'Crime & Safety',
+    score: 5.8,
+    trend: 'down',
+    trendPercent: -1.2,
+    description: 'Crime rates, police presence, community safety, and enforcement metrics.',
+    category: 'Social',
+    subFactors: [
+      { id: 'police-stations', name: 'Police Stations & Officers', score: 5.2, trend: 'flat', status: 'Stable' },
+      { id: 'patrols', name: 'Number of Patrols', score: 5.5, trend: 'down', status: 'Improving' },
+      { id: 'police-complaints', name: 'Police Complaints Factor', score: 6.1, trend: 'up', status: 'Rising' },
+      { id: 'community-policing', name: 'Community Policing Projects', score: 4.8, trend: 'down', status: 'Improving' },
+      { id: 'fines-enforcement', name: 'Fines & Enforcement Metrics', score: 6.3, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'transport-accessibility',
+    name: 'Transport & Accessibility',
+    score: 6.3,
+    trend: 'flat',
+    description: 'Public transport availability, commute times, toll costs, and road network status.',
+    category: 'Infrastructure',
+    subFactors: [
+      { id: 'metro', name: 'Metro Services', score: 5.9, trend: 'down', status: 'Improving' },
+      { id: 'light-rail', name: 'Light Rail', score: 6.2, trend: 'flat', status: 'Stable' },
+      { id: 'bus', name: 'Bus Services', score: 6.5, trend: 'flat', status: 'Stable' },
+      { id: 'train', name: 'Train Services', score: 6.1, trend: 'up', status: 'Rising' },
+      { id: 'freeways', name: 'Freeway Commute', score: 7.2, trend: 'up', status: 'Rising' },
+      { id: 'motorways', name: 'Motorway Commute', score: 6.8, trend: 'flat', status: 'Stable' },
+      { id: 'main-roads', name: 'Main Roads / Highways', score: 6.4, trend: 'up', status: 'Rising' },
+    ],
+  },
+  {
+    id: 'health-access',
+    name: 'Health Access',
+    score: 5.5,
+    trend: 'down',
+    trendPercent: -0.8,
+    description: 'Accessibility to healthcare services, hospitals, and medical facilities.',
+    category: 'Social',
+    subFactors: [
+      { id: 'hospital-access', name: 'Hospital Access', score: 5.3, trend: 'down', status: 'Improving' },
+      { id: 'gp-access', name: 'GP Access', score: 5.7, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'education',
+    name: 'Education',
+    score: 4.9,
+    trend: 'down',
+    trendPercent: -0.5,
+    description: 'School availability, quality, and educational outcomes.',
+    category: 'Social',
+    subFactors: [
+      { id: 'school-access', name: 'School Access', score: 4.7, trend: 'down', status: 'Improving' },
+      { id: 'quality', name: 'Education Quality', score: 5.1, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'employment-income',
+    name: 'Employment & Income',
+    score: 6.7,
+    trend: 'up',
+    trendPercent: 1.2,
+    description: 'Employment rates, income levels, and job market conditions.',
+    category: 'Economic',
+    subFactors: [
+      { id: 'unemployment', name: 'Unemployment Rate', score: 7.1, trend: 'up', status: 'Rising' },
+      { id: 'income-levels', name: 'Income Levels', score: 6.3, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'demographics',
+    name: 'Demographics & Population',
+    score: 5.2,
+    trend: 'flat',
+    description: 'Population density, age distribution, and demographic trends.',
+    category: 'Social',
+    subFactors: [
+      { id: 'density', name: 'Population Density', score: 5.4, trend: 'flat', status: 'Stable' },
+      { id: 'age-dist', name: 'Age Distribution', score: 5.0, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'gov-services',
+    name: 'Government Services',
+    score: 6.1,
+    trend: 'flat',
+    description: 'Access to and quality of government services.',
+    category: 'Infrastructure',
+    subFactors: [
+      { id: 'service-access', name: 'Service Access', score: 6.0, trend: 'flat', status: 'Stable' },
+      { id: 'service-quality', name: 'Service Quality', score: 6.2, trend: 'flat', status: 'Stable' },
+    ],
+  },
+  {
+    id: 'environmental-risk',
+    name: 'Environmental Risk',
+    score: 6.8,
+    trend: 'up',
+    trendPercent: 2.3,
+    description: 'Environmental hazards, climate risks, and natural disaster vulnerability.',
+    category: 'Environmental',
+    subFactors: [
+      { id: 'flood-risk', name: 'Flood Risk', score: 7.2, trend: 'up', status: 'Rising' },
+      { id: 'fire-risk', name: 'Fire Risk', score: 6.5, trend: 'up', status: 'Rising' },
+      { id: 'air-quality', name: 'Air Quality', score: 6.7, trend: 'flat', status: 'Stable' },
+    ],
+  },
+];
+
+export const mockRegions: Region[] = [
+  { id: 'sydney', name: 'Sydney Metro', stressScore: 7.8, isMostStressed: true },
+  { id: 'newcastle', name: 'Newcastle', stressScore: 6.2 },
+  { id: 'wollongong', name: 'Wollongong', stressScore: 5.9 },
+  { id: 'byron', name: 'Byron Bay', stressScore: 4.1, isMostResilient: true },
+  { id: 'central-coast', name: 'Central Coast', stressScore: 5.5 },
+];
+
+export const mockEnquiries: Enquiry[] = [
+  {
+    id: '1',
+    date: '2025-01-15',
+    name: 'Sarah Johnson',
+    organisation: 'NSW Research Institute',
+    email: 'sarah.j@nswresearch.gov.au',
+    type: 'Data Request',
+    linkedPage: '/factors/cost-of-living',
+    status: 'New',
+    assignedTo: 'Analyst 1',
+    aiAgentInvolved: false,
+    message: 'Requesting detailed data on cost of living sub-factors for research purposes.',
+    tags: ['High priority', 'Researcher'],
+    priority: 'High',
+  },
+  {
+    id: '2',
+    date: '2025-01-14',
+    name: 'Michael Chen',
+    email: 'mchen@example.com',
+    type: 'Feedback',
+    linkedPage: '/',
+    status: 'In Progress',
+    assignedTo: 'Admin 1',
+    aiAgentInvolved: true,
+    message: 'Great tool! Would love to see more historical trend data.',
+    tags: ['Feedback'],
+    priority: 'Low',
+  },
+  {
+    id: '3',
+    date: '2025-01-13',
+    name: 'ABC News',
+    organisation: 'ABC News',
+    email: 'news@abc.net.au',
+    type: 'Media',
+    linkedPage: '/command-centre',
+    status: 'Resolved',
+    assignedTo: 'Admin 1',
+    aiAgentInvolved: true,
+    message: 'Requesting interview about CMI methodology and latest stress scores.',
+    tags: ['Media'],
+    priority: 'Medium',
+  },
+];
+
+export const mockContentSections: ContentSection[] = [
+  {
+    id: 'about-why',
+    name: 'About > Why CMI?',
+    page: '/about',
+    views: 1245,
+    uniqueVisitors: 892,
+    avgTimeOnSection: 145,
+  },
+  {
+    id: 'crime-overview',
+    name: 'Crime & Safety Factor – Overview',
+    page: '/factors/crime-safety',
+    views: 2341,
+    uniqueVisitors: 1654,
+    avgTimeOnSection: 203,
+  },
+  {
+    id: 'cost-living-overview',
+    name: 'Cost of Living Factor – Overview',
+    page: '/factors/cost-of-living',
+    views: 3124,
+    uniqueVisitors: 2234,
+    avgTimeOnSection: 267,
+  },
+];
+
+export const mockDepartments: Department[] = [
+  {
+    id: 'health',
+    name: 'NSW Health',
+    score: 6.8,
+    serviceType: 'Health',
+    complaints: 234,
+    avgResponseTime: 12,
+    unresolvedIssues: 45,
+    status: 'Responsive',
+  },
+  {
+    id: 'education',
+    name: 'NSW Education',
+    score: 7.2,
+    serviceType: 'Education',
+    complaints: 189,
+    avgResponseTime: 18,
+    unresolvedIssues: 67,
+    status: 'Delayed',
+  },
+  {
+    id: 'transport',
+    name: 'Transport for NSW',
+    score: 5.9,
+    serviceType: 'Transport',
+    complaints: 312,
+    avgResponseTime: 15,
+    unresolvedIssues: 89,
+    status: 'Under Review',
+  },
+  {
+    id: 'police',
+    name: 'NSW Police',
+    score: 6.5,
+    serviceType: 'Emergency Services',
+    complaints: 156,
+    avgResponseTime: 8,
+    unresolvedIssues: 23,
+    status: 'Responsive',
+  },
+];
+
+export const mockChainOfResponsibility: ChainOfResponsibilityNode[] = [
+  { id: 'citizen', label: 'Citizen / Community', role: 'Stakeholder', status: 'Responsive', timeTaken: 0 },
+  { id: 'local', label: 'Local Services', role: 'Service Provider', status: 'Responsive', timeTaken: 2 },
+  { id: 'dept', label: 'Department', role: 'Government Agency', status: 'Delayed', timeTaken: 15 },
+  { id: 'minister', label: 'Minister / MP', role: 'Policy Maker', status: 'Under Review', timeTaken: 30 },
+  { id: 'parliament', label: 'Parliament / Law', role: 'Legislative', status: 'Responsive', timeTaken: 5 },
+];
+
+export const mockDataMappings: DataMapping[] = [
+  {
+    id: '1',
+    sourceColumn: 'ABS_CENSUS_2021_HOUSEHOLD_INCOME',
+    targetField: 'Employment & Income > Income Levels',
+    sourceDataset: 'ABS 2021 Census',
+    dataType: 'Numeric',
+    updateFrequency: 'Annual',
+    status: 'mapped',
+  },
+  {
+    id: '2',
+    sourceColumn: 'NSW_GOV_CRIME_STATS_2024',
+    targetField: 'Crime & Safety > Crime Rates',
+    sourceDataset: 'NSW Gov Crime Statistics',
+    dataType: 'Numeric',
+    updateFrequency: 'Quarterly',
+    status: 'mapped',
+  },
+  {
+    id: '3',
+    sourceColumn: 'TRANSPORT_NSW_COMMUTE_TIMES',
+    targetField: 'Transport & Accessibility > Commute Times',
+    sourceDataset: 'Transport for NSW',
+    dataType: 'Numeric',
+    updateFrequency: 'Monthly',
+    status: 'warning',
+  },
+];
+
+export const mockChartData: ChartDataPoint[] = [
+  { label: 'Jan', value: 6.2, date: '2025-01-01' },
+  { label: 'Feb', value: 6.5, date: '2025-02-01' },
+  { label: 'Mar', value: 6.8, date: '2025-03-01' },
+  { label: 'Apr', value: 7.1, date: '2025-04-01' },
+  { label: 'May', value: 7.2, date: '2025-05-01' },
+];
+
+export const overallStressScore = 6.8;
+export const lastDataUpdate = '2025-01-15T10:30:00Z';
+export const appVersion = '1.2.0';
+
